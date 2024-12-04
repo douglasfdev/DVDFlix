@@ -15,5 +15,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN docker-php-ext-install gettext intl pdo_pgsql
 COPY .env.example /usr/www/html/.env
 
+EXPOSE 8000
 
 CMD [ "php", "artisan", "serve" ]
