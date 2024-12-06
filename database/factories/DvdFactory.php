@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dvd>
  */
-class DVDFactory extends Factory
+class DvdFactory extends Factory
 {
     protected $model = \App\Models\Dvd::class;
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Dvd;
 
-class DVDSeeder extends Seeder
+class DvdSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CustomerSeeder::class,
             DisponibilitySeeder::class,
-            DVDSeeder::class,
+            DvdSeeder::class,
         ]);
     }
 }
