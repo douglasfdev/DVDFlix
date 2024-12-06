@@ -28,12 +28,15 @@ sudo su - ${USER}
 ## Rodar o composer
 *`docker-compose exec app composer install`*
 
+## Gerar uma secret key
+*`docker-compose exec app php artisan key:generate`*
+
 ## Rodar as migrations com as seeds
 *`docker-compose exec app php artisan migrate:fresh --seed`*
 
 ### Servidor
 Não é necessário executar o comando *`php artisan serve`*, servidor já está com Nginx para expormos a API como serviço web
-Serviço estará rodando na URL local: *``*
+Serviço estará rodando na URL local: *`http://localhost:8989/`*
 
 --------
 
