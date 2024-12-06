@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Dvd;
 use App\Http\Requests\DvdRequest;
-use App\Http\Requests\UpdateDvdRequest;
+use App\Http\Resources\DvdResponse;
 use Illuminate\Http\Response;
 
 class DvdController extends Controller
@@ -17,7 +17,7 @@ class DvdController extends Controller
      */
     public function index()
     {
-        return response()->json($this->dvd->paginate(25));
+        return DvdResponse::collection($this->dvd->paginate(25));
     }
 
     /**
@@ -25,7 +25,9 @@ class DvdController extends Controller
      */
     public function store(DvdRequest $request)
     {
-        return response()->json($this->dvd->create($request->validated()));
+        $data = $this->dvd->create($request->validated());
+
+        return DvdResponse::make($data, Response::HTTP_CREATED);
     }
 
     /**
@@ -33,7 +35,7 @@ class DvdController extends Controller
      */
     public function show(Dvd $dvd)
     {
-        return response()->json($dvd);
+        return DvdResponse::make($dvd, Response::HTTP_OK);
     }
 
     /**
@@ -41,9 +43,9 @@ class DvdController extends Controller
      */
     public function update(DvdRequest $request, Dvd $dvd)
     {
-        $this->dvd->update($request->validated());
+        $dvd->update($request->validated());
 
-        return response()->json($this->dvd->find($dvd->id));
+        return response()->json($dvd, Response::HTTP_OK);
     }
 
     /**
