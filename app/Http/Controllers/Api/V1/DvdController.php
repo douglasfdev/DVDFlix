@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dvd;
-use App\Http\Requests\StoreDvdRequest;
+use App\Http\Requests\DvdRequest;
 use App\Http\Requests\UpdateDvdRequest;
 
 class DvdController extends Controller
@@ -28,7 +28,7 @@ class DvdController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDvdRequest $request)
+    public function store(DvdRequest $request)
     {
         //
     }
@@ -52,7 +52,7 @@ class DvdController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDvdRequest $request, Dvd $dvd)
+    public function update(DvdRequest $request, Dvd $dvd)
     {
         //
     }

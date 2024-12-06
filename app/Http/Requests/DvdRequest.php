@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDvdRequest extends FormRequest
+class DvdRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateDvdRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'genre' => 'required|string|max:255',
+            'disponibility' => 'integer',
+            'price' => 'integer|min:0',
+            'description' => 'nullable|string',
+            'image' => 'nullable|string|max:255',
         ];
     }
 }

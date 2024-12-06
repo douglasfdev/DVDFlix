@@ -20,14 +20,18 @@ return new class extends Migration
                 ->unsigned()
                 ->default(Disponibility::AVAILABLE->value())
                 ->comment('The disponibility status of the DVD');
+
             $table->foreign('disponibility')
                 ->references('id')
                 ->on('disponibility_enumerator')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->integer('price', false, true)->comment('The price of the DVD');
-            $table->string('description');
-            $table->string('image');
+
+            $table->integer('price', false, true)
+                ->comment('The price of the DVD')->nullable();
+
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
