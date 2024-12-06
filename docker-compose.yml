@@ -1,21 +1,31 @@
 services:
   app:
     container_name: rental-dvd-app
-    restart: always
-    build: .
-    ports:
-      - "8000:8000"
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www
     tty: true
     depends_on:
       - mysql
       - grafana
       - redis
       - rabbitmq
-    command: php artisan serve
     env_file:
       - .env
+    networks:
+      - rental-dvd-network
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8989:80"
     volumes:
-      - ./:/usr/www/html
+      - ./:/var/www
+      - ./.docker/nginx/:/etc/nginx/conf.d/
     networks:
       - rental-dvd-network
 
@@ -27,7 +37,7 @@ services:
     tty: true
     restart: always
     volumes:
-      - .docker/dbdata:/var/lib/mysql
+      - .docker/mysql/dbdata:/var/lib/mysql
     env_file:
       - .env
     environment:
