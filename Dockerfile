@@ -41,5 +41,7 @@ COPY .docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 RUN git config --global --add safe.directory /var/www
 
 RUN chown -R $user:$user /var/www
+RUN apt-get update && apt-get install -y sudo \
+    && echo "yourusername ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $user

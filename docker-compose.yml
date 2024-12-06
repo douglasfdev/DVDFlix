@@ -33,7 +33,7 @@ services:
     container_name: rental-dvd-db
     build: .docker/mysql
     ports:
-      - "3306:3306"
+      - "3309:3306"
     tty: true
     restart: always
     volumes:
