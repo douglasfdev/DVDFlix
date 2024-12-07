@@ -31,7 +31,7 @@ return new class extends Migration
                 sale.sold_at as soldAt,
                 sale.status as status,
                 sale.total_amount as totalAmount,
-                ROUND(sale.total_amount * company.commission_rate / 100, 2) as comission
+                ROUND(sale.total_amount * company.comission_rate / 100, 2) as comission
             ")
             ->toSql();
 

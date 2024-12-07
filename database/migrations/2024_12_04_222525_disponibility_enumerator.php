@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dvds', function (Blueprint $table) {
+        Schema::table('disponibility_enumerator', function (Blueprint $table) {
             $table->dropForeign(['disponibility']);
             $table->dropIndex(['id', 'title', 'disponibility']);
         });

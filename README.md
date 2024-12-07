@@ -72,3 +72,8 @@ Para rodar os Jobs do Crontask basta rodar o comando
 *`php artisan schedule:run`*
 ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler novo.
 *`php artisan schedule:work`*
+
+---------
+
+# Postman
+[Collection](./Rent_a_DVD.postman_collection.json)

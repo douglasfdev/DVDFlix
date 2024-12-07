@@ -14,7 +14,7 @@ class Companies extends Model
     protected $table = 'companies';
 
     protected $fillable = [
-        'commission_rate',
+        'comission_rate',
         'name',
     ];
 

@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\{
     CustomerController,
-    DvdController
+    DvdController,
+    DashboardsController
 };
 use App\Services\RentDvdService;
 use Pest\ArchPresets\Custom;
@@ -27,5 +28,9 @@ Route::middleware(['throttle:api'])->group(function () {
 
     Route::prefix('customers/{user}/dvds/{dvd}')->group(function () {
         Route::post('/', [RentDvdService::class, 'customerRentedDvd'])->name('dvds.rent');
+    });
+
+    Route::prefix('dashboards')->group(function () {
+        Route::get('/', [DashboardsController::class, 'index'])->name('dashboards.index');
     });
 });
