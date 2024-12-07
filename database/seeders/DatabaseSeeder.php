@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             DvdSeeder::class,
             CartSeeder::class,
             PointOfSaleSeeder::class,
+            SellerSeeder::class,
             StockSeeder::class,
+            SalesSeeder::class,
         ]);
     }
 }

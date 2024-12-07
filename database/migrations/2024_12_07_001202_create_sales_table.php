@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('point_of_sale_id')->constrained();
             $table->foreignId('seller_id')->constrained();
             $table->foreignId('cart_id')->constrained();
             $table->timestamp('sold_at');

@@ -24,11 +24,12 @@ class SalesFactory extends Factory
         $pointOfSale = PointOfSale::factory()->create();
 
         return [
+            'point_of_sale_id' => $pointOfSale,
+            'seller_id' => Seller::factory()->create(['point_of_sale_id' => $pointOfSale->id]),
             'cart_id' => Cart::factory()->create(),
-            'seller_id' => Seller::factory()->create(['company_id' => $pointOfSale->id]),
             'sold_at' => fake()->dateTimeBetween('-8 years', '-1 year'),
+            'status' => fake()->randomElement(SalesStatus::cases()),
             'total_amount' => fake()->numberBetween(10000, 50000),
-            'status' => fake()->randomElement(SalesStatus::cases())
         ];
     }
 }

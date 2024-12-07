@@ -18,10 +18,8 @@ class SellerFactory extends Factory
      */
     public function definition(): array
     {
-        $pointOfSale = PointOfSale::factory()->create();
-
         return [
-            'company_id' => $pointOfSale->id,
+            'point_of_sale_id' => PointOfSale::factory()->create(),
             'user_id' => User::factory()->create(['role_id' => fake()->numberBetween(2, 3)]),
         ];
     }
