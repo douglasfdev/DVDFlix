@@ -15,7 +15,7 @@ enum RoleEnum: int
             self::ADMIN => 'Admin',
             self::MANAGER => 'Manager',
             self::SELLER => 'Seller',
-            self::CUSTOMER => 'Client',
+            self::CUSTOMER => 'Customer',
         };
     }
 
@@ -25,17 +25,17 @@ enum RoleEnum: int
             self::ADMIN => 'Administrator',
             self::MANAGER => 'Manager',
             self::SELLER => 'Seller',
-            self::CUSTOMER => 'Client',
+            self::CUSTOMER => 'Customer',
         };
     }
 
     public function permissions(): array
     {
         return match ($this) {
-            self::ADMIN => ['admin', 'manager', 'seller', 'client'],
-            self::MANAGER => ['manager', 'seller', 'client'],
-            self::SELLER => ['seller', 'client'],
-            self::CUSTOMER => ['client'],
+            self::ADMIN => ['admin', 'manager', 'seller', 'customer'],
+            self::MANAGER => ['manager', 'seller', 'customer'],
+            self::SELLER => ['seller', 'customer'],
+            self::CUSTOMER => ['customer'],
         };
     }
 
@@ -47,5 +47,15 @@ enum RoleEnum: int
             self::SELLER => self::SELLER->value,
             self::CUSTOMER => self::CUSTOMER->value,
         };
+    }
+
+    public static function values(): array
+    {
+        return array_map(fn(RoleEnum $role) => $role->value, self::cases());
+    }
+
+    public static function names(): array
+    {
+        return array_map(fn(RoleEnum $role) => $role->name, self::cases());
     }
 }

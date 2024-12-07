@@ -41,10 +41,12 @@ As filas estão sendo implementadas com Redis.
 Para consumir as filas basta rodar o comando *`docker-compose exec app php artisan queue:work redis`*
 
 ### Scheduler / Cron
+
 Para rodar os Jobs do Crontask basta rodar o comando
 *`docker-compose exec app php artisan schedule:run`*
 ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler novo.
 *`docker-compose exec app php artisan schedule:work`*
+
 --------
 
 # Para ambiente local basta ter o PHP na versão 8.3 ou acima, também precisa ter Redis e MySQL instalado na máquina
