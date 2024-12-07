@@ -21,10 +21,16 @@ class UserRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
+    $rules = [
       'name' => 'required|string|max:255',
       'email' => 'required|string|email|max:255',
-      'phone' => 'nullable|string|regex:/^\+?[0-9]{10,15}$/',
+      'phone' => 'nullable|string|regex:/^\+?[0-9]{10,15}$/'
     ];
+
+    if ($this->isMethod('post')) {
+      $rules['password'] = 'required|string|min:8';
+    }
+
+    return $rules;
   }
 }

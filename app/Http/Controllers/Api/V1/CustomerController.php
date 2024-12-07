@@ -5,43 +5,35 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\CustomerResponse;
-use Illuminate\Http\Response;
+use App\Services\CustomerService;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function __construct(private readonly User $user) {}
+    public function __construct(private readonly CustomerService $customerService) {}
 
     public function index()
     {
-        return CustomerResponse::collection($this->user->paginate(25));
+        return $this->customerService->index();
     }
 
     public function store(UserRequest $request)
     {
-        $customerCreation = $this->user->create($request->validated());
-
-        $customerCreation->customer()->create();
-
-        return CustomerResponse::make($customerCreation, Response::HTTP_CREATED);
+        return $this->customerService->store($request);
     }
 
-    public function show(User $customer)
+    public function show(User $user)
     {
-        return CustomerResponse::make($customer, Response::HTTP_OK);
+        return $this->customerService->show($user);
     }
 
-    public function update(UserRequest $request, User $customer)
+    public function update(UserRequest $request, User $user)
     {
-        $customer->update($request->validated());
-
-        return CustomerResponse::make($customer->refresh(), Response::HTTP_OK);
+        return $this->customerService->update($request, $user);
     }
 
-    public function destroy(User $customer)
+    public function destroy(Request $request)
     {
-        $customer->delete();
-
-        return CustomerResponse::make(null, Response::HTTP_NO_CONTENT);
+        return $this->customerService->destroy($request->id);
     }
 }

@@ -2,43 +2,72 @@
 
 namespace App\Services;
 
+use App\Enums\RoleEnum;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\CustomerResponse;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 class CustomerService
 {
-  public function __construct(private readonly Customer $customer) {}
+  public function __construct(
+    private readonly User $user,
+    private readonly Customer $customer
+  ) {}
 
   public function index()
   {
-    return CustomerResponse::collection($this->customer->paginate(25));
+    return CustomerResponse::collection($this->user->with('customer')->paginate(25));
   }
 
   public function store(UserRequest $request)
   {
-    $data = $this->customer->create($request->validated());
+    $customerCreation = $this->user->create($request->validated());
+    $customerCreation->role_id = RoleEnum::CUSTOMER->value();
+    $customerCreation->save();
+    $customerCreation->customer()->create();
 
-    return CustomerResponse::make($data, Response::HTTP_CREATED);
+    return CustomerResponse::make($customerCreation, Response::HTTP_CREATED);
   }
 
-  public function show(Customer $customer)
+  public function show(User $id)
   {
-    return CustomerResponse::make($customer, Response::HTTP_OK);
+    $user = $this->user->with('customer')->find($id);
+
+    if (!$user) {
+      return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
+    }
+    return CustomerResponse::make($user->first(), Response::HTTP_OK);
   }
 
-  public function update(UserRequest $request, Customer $customer)
+  public function update(UserRequest $request, User $user)
   {
-    $customer->update($request->validated());
+    if (!$user->with('customer')) {
+      return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
+    }
 
-    return CustomerResponse::make($customer->refresh(), Response::HTTP_OK);
+    $user->update($request->validated());
+
+    return CustomerResponse::make($user->refresh(), Response::HTTP_OK);
   }
 
-  public function destroy(Customer $customer)
+  public function destroy(int $id)
   {
+    $user = $user = $this->user->find($id);
+
+    if (!$user) {
+      return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
+    };
+
+    $customer = Customer::query()->where('user_id', $user->id);
+
+    if (!$customer) {
+      return response()->json(['message' => 'Customer not found'], Response::HTTP_NOT_FOUND);
+    }
+
     $customer->delete();
 
-    return CustomerResponse::make(null, Response::HTTP_NO_CONTENT);
+    return response()->json(null, Response::HTTP_NO_CONTENT);
   }
 }

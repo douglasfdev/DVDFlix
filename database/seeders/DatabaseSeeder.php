@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             DisponibilitySeeder::class,
             DvdSeeder::class,
+            CartSeeder::class,
+            PointOfSaleSeeder::class,
+            StockSeeder::class,
         ]);
     }
 }

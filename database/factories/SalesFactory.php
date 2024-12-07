@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\SalesStatus;
+use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\PointOfSale;
 use App\Models\Seller;
@@ -23,8 +24,8 @@ class SalesFactory extends Factory
         $pointOfSale = PointOfSale::factory()->create();
 
         return [
+            'cart_id' => Cart::factory()->create(),
             'seller_id' => Seller::factory()->create(['company_id' => $pointOfSale->id]),
-            'customer_id' => Customer::factory()->create(['company_id' => $pointOfSale->id]),
             'sold_at' => fake()->dateTimeBetween('-8 years', '-1 year'),
             'total_amount' => fake()->numberBetween(10000, 50000),
             'status' => fake()->randomElement(SalesStatus::cases())

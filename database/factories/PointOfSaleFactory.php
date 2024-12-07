@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
+use App\Models\Companies;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +19,10 @@ class PointOfSaleFactory extends Factory
     public function definition(): array
     {
         return [
-            'commission_rate' => fake()->numberBetween(1, 6),
-            'name' => fake()->company()
+            'name' => fake()->company(),
+            'phone' => fake('pt_BR')->phoneNumber(),
+            'address_id' => Address::factory()->create(),
+            'company_id' => Companies::factory()->create(),
         ];
     }
 }

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('point_of_sales', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
             $table->string('phone');
+            $table->foreignId('address_id')->constrained();
             $table->foreignId('company_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

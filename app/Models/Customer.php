@@ -19,8 +19,8 @@ class Customer extends Model
         return $this->belongsTo(Address::class);
     }
 
-    public function cart(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -21,8 +21,8 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'address_id' => Address::factory()->create()->id,
-            'user_id' => User::factory()->create(['role_id' => RoleEnum::CUSTOMER]),
+            'address_id' => Address::factory()->create(),
+            'user_id' => User::factory()->create(['role_id' => RoleEnum::CUSTOMER->value()]),
         ];
     }
 }

@@ -49,7 +49,7 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 
 --------
 
-# Para ambiente local basta ter o PHP na versão 8.3 ou acima, também precisa ter Redis e MySQL instalado na máquina
+# Para ambiente local basta ter o PHP na versão 8.2 ou acima, também precisa ter Redis e MySQL instalado na máquina
 
 ## Rodar o composer
 *`composer install`*

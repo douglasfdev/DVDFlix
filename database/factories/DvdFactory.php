@@ -19,12 +19,10 @@ class DvdFactory extends Factory
      */
     public function definition(): array
     {
-        $disponibilityId = fake()->numberBetween(1, 2);
-
         return [
             'title' => fake()->name(),
             'genre' => fake()->name(),
-            'disponibility' => $disponibilityId,
+            'disponibility' => fake()->numberBetween(1, 2),
             'price' => fake()->randomFloat(2, 0, 100),
             'description' => fake()->text(),
             'image' => fake()->imageUrl(),

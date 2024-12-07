@@ -14,10 +14,6 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory(200)->create();
-
-        Customer::factory(200)->create([
-            'user_id' => $user->random()->id,
-        ]);
+        Customer::factory(200)->create();
     }
 }

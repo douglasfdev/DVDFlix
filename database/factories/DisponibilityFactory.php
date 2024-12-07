@@ -21,7 +21,7 @@ class DisponibilityFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => $this->faker->randomElement(
+            'status' => fake()->randomElement(
                 array_map(fn($case) => $case->label(), DisponibilityEnum::cases())
             ),
         ];

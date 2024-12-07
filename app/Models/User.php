@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
         'role_id',
     ];
 
@@ -52,7 +53,9 @@ class User extends Authenticatable
 
     public function customer(): HasOne
     {
-        return $this->hasOne(Customer::class);
+        return $this->hasOne(Customer::class)
+            ->with('address')
+            ->whereNotNull('address_id');
     }
 
     public function seller(): HasOne

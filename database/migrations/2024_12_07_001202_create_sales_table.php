@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->constrained();
-            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('cart_id')->constrained();
             $table->timestamp('sold_at');
             $table->char('status', 1);
             $table->integer('total_amount');
