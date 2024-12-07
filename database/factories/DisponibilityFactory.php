@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Disponibility;
-use App\Http\Enums\Disponibility as DisponibilityEnum;
+use App\Enums\Disponibility as DisponibilityEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

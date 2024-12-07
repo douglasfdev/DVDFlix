@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Enums\Disponibility;
+use App\Enums\Disponibility;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
