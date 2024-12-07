@@ -21,11 +21,11 @@ Route::middleware(['throttle:api'])->group(function () {
         Route::get('/', [DvdController::class, 'index'])->name('dvds.index');
         Route::get('{dvd}', [DvdController::class, 'show'])->name('dvds.show');
         Route::post('/', [DvdController::class, 'store'])->name('dvds.store');
-        Route::patch('/{dvd}', [DvdController::class, 'update'])->name('dvds.update');
+        Route::post('/{dvd}', [DvdController::class, 'update'])->name('dvds.update');
         Route::delete('/{dvd}', [DvdController::class, 'destroy'])->name('dvds.destroy');
     });
 
-    Route::prefix('customers/{customer}/dvds')->group(function () {
-        Route::post('/', [RentDvdService::class, 'rent'])->name('dvds.rent');
+    Route::prefix('customers/{user}/dvds/{dvd}')->group(function () {
+        Route::post('/', [RentDvdService::class, 'customerRentedDvd'])->name('dvds.rent');
     });
 });

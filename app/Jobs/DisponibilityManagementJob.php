@@ -14,7 +14,7 @@ class DisponibilityManagementJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public Dvd $dvd) {}
+    public function __construct(public ?Dvd $dvd) {}
 
     /**
      * Execute the job.

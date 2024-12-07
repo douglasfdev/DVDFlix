@@ -43,7 +43,7 @@ class CustomerService
 
   public function update(UserRequest $request, User $user)
   {
-    if (!$user->with('customer')) {
+    if (!$user->with('customer')->find($user->id)) {
       return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
     }
 

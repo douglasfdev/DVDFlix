@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\Disponibility;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
@@ -26,7 +27,7 @@ class DvdResponse extends JsonResource
         return [
             'title' => $this->title,
             'genre' => $this->genre,
-            'disponibility' => $this->disponibility,
+            'disponibility' => Disponibility::from($this->disponibility)->label(),
             'price' => $this->price,
             'description' => $this->description,
             'image' => $this->image,

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Dvd;
 use App\Http\Requests\DvdRequest;
 use App\Services\DvdService;
+use Illuminate\Http\Request;
 
 class DvdController extends Controller
 {

@@ -14,6 +14,7 @@ class Sales extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'point_of_sale_id',
         'cart_id',
         'seller_id',
         'sold_at',

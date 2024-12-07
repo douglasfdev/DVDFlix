@@ -24,10 +24,10 @@ class DvdRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
-            'disponibility' => 'integer',
+            'disponibility' => 'integer|max_digits:1',
             'price' => 'integer|min:0',
             'description' => 'nullable|string',
-            'image' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg',
         ];
     }
 }

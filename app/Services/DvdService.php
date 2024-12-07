@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Enums\Disponibility as DisponibilityEnum;
 use App\Http\Requests\DvdRequest;
 use App\Http\Resources\DvdResponse;
 use App\Models\Dvd;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class DvdService
@@ -13,9 +15,13 @@ class DvdService
 
   public function index()
   {
-    // $dvd = Dvd::find(1);
-    // DisponibilityManagementJob::dispatch($dvd)->onConnection('redis');
-    return DvdResponse::collection($this->dvd->paginate(25));
+    return DvdResponse::collection(
+      $this->dvd->where(
+        'disponibility',
+        '!=',
+        DisponibilityEnum::UNAVAILABLE->value()
+      )->paginate(25)
+    );
   }
 
   /**
@@ -23,9 +29,13 @@ class DvdService
    */
   public function store(DvdRequest $request)
   {
-    $data = $this->dvd->create($request->validated());
+    $dvd = $this->dvd->create($request->validated());
+    if (!$request->has('disponibility')) {
+      $dvd->disponibility = DisponibilityEnum::AVAILABLE->value();
+      $dvd->save();
+    }
 
-    return DvdResponse::make($data, Response::HTTP_CREATED);
+    return DvdResponse::make($dvd, Response::HTTP_CREATED);
   }
 
   /**
@@ -33,6 +43,15 @@ class DvdService
    */
   public function show(Dvd $dvd)
   {
+    $dvd = $dvd->newQuery()
+      ->where('id', $dvd->id)
+      ->where('disponibility', '!=', DisponibilityEnum::UNAVAILABLE->value())
+      ->first();
+
+    if (!$dvd) {
+      return response()->json(['message' => 'Dvd not found'], Response::HTTP_NOT_FOUND);
+    }
+
     return DvdResponse::make($dvd, Response::HTTP_OK);
   }
 
@@ -43,7 +62,7 @@ class DvdService
   {
     $dvd->update($request->validated());
 
-    return response()->json($dvd, Response::HTTP_OK);
+    return DvdResponse::make($dvd->fresh(), Response::HTTP_OK);
   }
 
   /**
@@ -53,6 +72,6 @@ class DvdService
   {
     $dvd->delete();
 
-    return response()->json(null, Response::HTTP_NO_CONTENT);
+    return DvdResponse::make(null, Response::HTTP_NO_CONTENT);
   }
 }

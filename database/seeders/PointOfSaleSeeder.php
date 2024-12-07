@@ -13,6 +13,6 @@ class PointOfSaleSeeder extends Seeder
      */
     public function run(): void
     {
-        PointOfSale::factory(10)->create();
+        PointOfSale::factory(100)->create();
     }
 }
