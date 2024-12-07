@@ -2,42 +2,43 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\CustomerResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
-    public function __construct(private readonly Customer $customer) {}
+    public function __construct(private readonly User $user) {}
 
-    public function index(Request $request)
+    public function index()
     {
-        return CustomerResponse::collection($this->customer->paginate(25));
+        return CustomerResponse::collection($this->user->paginate(25));
     }
 
-    public function store(CustomerRequest $request)
+    public function store(UserRequest $request)
     {
-        $data = $this->customer->create($request->validated());
+        $customerCreation = $this->user->create($request->validated());
 
-        return CustomerResponse::make($data, Response::HTTP_CREATED);
+        $customerCreation->customer()->create();
+
+        return CustomerResponse::make($customerCreation, Response::HTTP_CREATED);
     }
 
-    public function show(Customer $customer)
+    public function show(User $customer)
     {
         return CustomerResponse::make($customer, Response::HTTP_OK);
     }
 
-    public function update(CustomerRequest $request, Customer $customer)
+    public function update(UserRequest $request, User $customer)
     {
         $customer->update($request->validated());
 
         return CustomerResponse::make($customer->refresh(), Response::HTTP_OK);
     }
 
-    public function destroy(Customer $customer)
+    public function destroy(User $customer)
     {
         $customer->delete();
 

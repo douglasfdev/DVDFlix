@@ -5,19 +5,18 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Dvd;
 use App\Http\Requests\DvdRequest;
-use App\Http\Resources\DvdResponse;
-use Illuminate\Http\Response;
+use App\Services\DvdService;
 
 class DvdController extends Controller
 {
-    public function __construct(private readonly Dvd $dvd) {}
+    public function __construct(private readonly DvdService $dvdService) {}
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return DvdResponse::collection($this->dvd->paginate(25));
+        return $this->dvdService->index();
     }
 
     /**
@@ -25,9 +24,7 @@ class DvdController extends Controller
      */
     public function store(DvdRequest $request)
     {
-        $data = $this->dvd->create($request->validated());
-
-        return DvdResponse::make($data, Response::HTTP_CREATED);
+        return $this->dvdService->store($request);
     }
 
     /**
@@ -35,7 +32,7 @@ class DvdController extends Controller
      */
     public function show(Dvd $dvd)
     {
-        return DvdResponse::make($dvd, Response::HTTP_OK);
+        return $this->dvdService->show($dvd);
     }
 
     /**
@@ -43,9 +40,7 @@ class DvdController extends Controller
      */
     public function update(DvdRequest $request, Dvd $dvd)
     {
-        $dvd->update($request->validated());
-
-        return response()->json($dvd, Response::HTTP_OK);
+        return $this->dvdService->update($request, $dvd);
     }
 
     /**
@@ -53,8 +48,6 @@ class DvdController extends Controller
      */
     public function destroy(Dvd $dvd)
     {
-        $dvd->delete();
-
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return $this->dvdService->destroy($dvd);
     }
 }

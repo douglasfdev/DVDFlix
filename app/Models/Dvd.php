@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\{
+    BelongsTo,
+    HasMany
+};
 
 class Dvd extends Model
 {
@@ -24,5 +27,15 @@ class Dvd extends Model
     public function customer(): HasMany
     {
         return $this->hasMany(Customer::class);
+    }
+
+    public function stock(): BelongsTo
+    {
+        return $this->BelongsTo(Stock::class);
+    }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
     }
 }
