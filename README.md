@@ -5,6 +5,8 @@
 
 Este projeto é destinado a aplicação para alugueis de DVD.
 
+# Serviço Backend
+
 * [Configurando Ambiente com Docker](#configurando-ambiente-de-desenvolvimento)
 * * [Filas](#filas)
 * * [Cron Tasks](#scheduler--cron)
@@ -101,3 +103,25 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 [DiagramaOnline](https://dbdiagram.io/d/6754fbd0e9daa85aca009b5d)
 
 ![Diagrama](assets/DatabaseDiagram.png)
+
+# Serviço Frontend
+![Navbar](assets/home-top.png)
+![Footer](assets/home-bottom.png)
+![Dashboard](assets/comission-board.png)
+
+### Tela principal
+Basta rodar a aplicação com Docker: [ref](#rodar-o-docker-compose) e visitar a página:
+*`http://localhost:8989/`*
+
+Caso esteja rodando [localmente](#configuração-local) o serviço frontend estará rodando no endereço:
+*`http://localhost:8000/`*
+
+### Configuração local
+Ter o node instalado na versão 20+
+
+Rodar os comandos:
+```
+npm i
+npm run build
+npm run dev
+```
