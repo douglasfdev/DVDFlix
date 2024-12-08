@@ -3,15 +3,28 @@ import { ref, onMounted } from 'vue';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { Bar } from 'vue-chartjs';
 import api from '../infra/Gateways/DashboardsGateway';
+import { CommissionApiResponse } from '@/domain';
+
+interface Dataset {
+    label: string;
+    data: number[];
+    backgroundColor: string;
+    borderColor: string;
+    borderWidth: number;
+}
+
+interface ChartData {
+    labels: string[];
+    datasets: Dataset[];
+}
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
-const chartData = ref(null);
+const chartData = ref<ChartData | null>(null);
 
 const fetchData = async () => {
     try {
-        const { data: { data } } = await api.getComissions();
-
+        const { data: { data } } = await api.getComissions<CommissionApiResponse>();
         const labels = data.map(item => item.seller);
         const commissions = data.map(item => parseFloat(item.comission));
 

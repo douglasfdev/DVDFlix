@@ -4,28 +4,38 @@ import Footer from './Footer.vue';
 import { ref, computed, onMounted, onUpdated } from 'vue';
 import { AxiosError } from 'axios';
 import api from '../infra/Gateways/DvdsGateway';
+import { Dvd, DvdApiResponse, Links, Meta } from '@/domain';
 
-const dvds = ref([]);
-const meta = ref(null);
-const links = ref([]);
+const dvds = ref<Dvd[] | null>([]);
+const meta = ref<Meta | null>(null);
+const links = ref<Links>({
+    first: '',
+    last: '',
+    next: '',
+    prev: ''
+});
 const currentPage = ref(1);
 const isLoading = ref(true);
 const isFetching = ref(false);
 
 const getDvds = async (page: number = 1) => {
     try {
-        const { data: { data, meta: metaData, links: linksData } } = await api.getDvds({ params: { page } });
+        const {
+            data: {
+                data, meta: metaData, links: linksData
+            }
+        } = await api.getDvds<DvdApiResponse>({ params: { page } });
         dvds.value = data;
         meta.value = metaData;
         links.value = linksData;
         currentPage.value = meta.value?.current_page || 1;
     } catch (e: any) {
         if (e instanceof Error) {
-            alert('js', e.message);
+            alert(e.message);
         }
 
         if (e instanceof AxiosError) {
-            alert('axios', e.message);
+            alert(e.message);
         }
     } finally {
         isLoading.value = false;
@@ -44,7 +54,7 @@ const goToPage = async (page: number) => {
 };
 
 const goToPreviousPage = async () => {
-    if (isFetching.value) return; // Evita múltiplos cliques
+    if (isFetching.value) return;
     const previousLink = meta.value?.links?.find(link => link.label === "&laquo; Previous");
     if (previousLink?.url) {
         const page = Number(new URL(previousLink.url).searchParams.get('page'));
@@ -87,7 +97,7 @@ onMounted(() => {
 
         <div class="w-full max-w-5xl mt-10">
             <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
-                <li v-for="dvd in dvds" :key="dvd.id">
+                <li v-for="dvd in dvds" :key="dvd.title">
                     <div class="p-4 text-center bg-white rounded-lg shadow">
                         <h3 class="text-lg font-semibold">{{ dvd.title }}</h3>
                         <img :src="dvd.image" alt="Poster" class="object-cover w-full h-48">
