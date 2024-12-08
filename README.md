@@ -1,4 +1,7 @@
-# Rent a DVD
+# DVDFLix
+
+# Wiki
+[Página Wiki](https://github.com/douglasfdev/rent_a_dvd/wiki)
 
 Este projeto é destinado a aplicação para alugueis de DVD.
 
@@ -90,10 +93,10 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 ---------
 
 # Postman
-[Collection](assets/Rent_a_DVD.postman_collection.json)
+[Collection](assets/DVDFlix.postman_collection.json)
 
 # Diagrama do Banco de Dados
-[Documentação](https://dbdocs.io/douglas.fernandes91/Rent_a_Dvd)
+[Documentação](https://dbdocs.io/douglas.fernandes91/DVDFlix)
 
 [DiagramaOnline](https://dbdiagram.io/d/6754fbd0e9daa85aca009b5d)
 
