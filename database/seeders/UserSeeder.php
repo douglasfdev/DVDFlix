@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
       'name' => 'Admin',
       'email' => 'admin@admin.com',
       'password' => bcrypt('password'),
+      'phone' => '123456789',
       'email_verified_at' => now(),
       'remember_token' => Str::random(10),
       'role_id' => RoleEnum::ADMIN,
