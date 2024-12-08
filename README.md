@@ -105,8 +105,8 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 ![Diagrama](assets/DatabaseDiagram.png)
 
 # Serviço Frontend
-![Navbar](assets/home-top.png)
-![Footer](assets/home-bottom.png)
+![Navbar](assets/home-nav.png)
+![Footer](assets/home-footer.png)
 ![Dashboard](assets/comission-board.png)
 
 ### Tela principal
