@@ -82,9 +82,25 @@ services:
     networks:
       - rental-dvd-network
 
+  frontend:
+    container_name: rental-dvd-frontend
+    image: node:lts-alpine
+    restart: unless-stopped
+    ports:
+      - "5172:5172"
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    command: "npm run build && npm run dev"
+    depends_on:
+      - app
+    tty: true
+    networks:
+      - rental-dvd-network
+
 networks:
   rental-dvd-network:
     driver: bridge
 
 volumes:
-  mysql-data: {}
+  dbdata: {}

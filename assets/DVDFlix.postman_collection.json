@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "eaa718c6-60c4-4ed2-945f-95d0a507a4f6",
-		"name": "Rent a DVD",
+		"name": "DVDFlix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26856028"
 	},
@@ -411,7 +411,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/dashboards/",
+							"raw": "{{BASE_URL}}/api/v1/dashboards/sellersComissions",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -419,7 +419,7 @@
 								"api",
 								"v1",
 								"dashboards",
-								""
+								"sellersComissions"
 							]
 						}
 					},
