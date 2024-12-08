@@ -31,14 +31,18 @@ class CustomerService
     return CustomerResponse::make($customerCreation, Response::HTTP_CREATED);
   }
 
-  public function show(User $id)
+  public function show(User $user)
   {
-    $user = $this->user->with('customer')->find($id);
-
     if (!$user) {
       return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
     }
-    return CustomerResponse::make($user->first(), Response::HTTP_OK);
+
+    $customer = $user->with('customer')->find($user->id);
+    if (!$customer) {
+      return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
+    }
+
+    return CustomerResponse::make($customer, Response::HTTP_OK);
   }
 
   public function update(UserRequest $request, User $user)
@@ -52,15 +56,13 @@ class CustomerService
     return CustomerResponse::make($user->refresh(), Response::HTTP_OK);
   }
 
-  public function destroy(int $id)
+  public function destroy(User $user)
   {
-    $user = $user = $this->user->find($id);
-
     if (!$user) {
       return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
     };
 
-    $customer = Customer::query()->where('user_id', $user->id);
+    $customer = $this->customer::query()->where('user_id', $user->id);
 
     if (!$customer) {
       return response()->json(['message' => 'Customer not found'], Response::HTTP_NOT_FOUND);
@@ -68,6 +70,6 @@ class CustomerService
 
     $customer->delete();
 
-    return response()->json(null, Response::HTTP_NO_CONTENT);
+    return CustomerResponse::make(null, Response::HTTP_NO_CONTENT);
   }
 }

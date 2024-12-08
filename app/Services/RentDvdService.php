@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Enums\SalesStatus;
-use App\Http\Resources\DvdResponse;
 use App\Jobs\DisponibilityManagementJob;
 use App\Models\{
   Cart,
@@ -27,13 +26,15 @@ class RentDvdService
   {
     $dvdStock = $this->stock::where('dvd_id', $dvd->id)->first();
 
-    if ($hasStock = $dvdStock->quantity === 0) {
+    $notHasStock = $dvdStock->quantity === 0;
+
+    if ($notHasStock) {
       return response()->json(['message' => 'Dvd not available'], Response::HTTP_BAD_REQUEST);
     }
 
     $dvdStock->decrement('quantity', 1);
 
-    if (!$hasStock) {
+    if ($notHasStock) {
       DisponibilityManagementJob::dispatch($dvd)->onConnection('redis');
     }
 
@@ -51,6 +52,13 @@ class RentDvdService
       'total_amount' => $request->total_amount ?? 0
     ]);
 
-    return response()->json($sales, Response::HTTP_CREATED);
+    return response()->json([
+      'data' => [
+        ['sale' => $sales],
+        ['cart' => $cart],
+        ['dvd' => $dvd],
+        ['user' => $user]
+      ]
+    ], Response::HTTP_CREATED);
   }
 }

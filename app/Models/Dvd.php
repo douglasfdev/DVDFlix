@@ -29,9 +29,9 @@ class Dvd extends Model
         return $this->hasMany(Customer::class);
     }
 
-    public function stock(): BelongsTo
+    public function stock(): HasMany
     {
-        return $this->BelongsTo(Stock::class);
+        return $this->hasMany(Stock::class, 'dvd_id', 'id');
     }
 
     public function cart(): BelongsTo

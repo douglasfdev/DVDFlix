@@ -21,13 +21,23 @@ class DvdRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
             'disponibility' => 'integer|max_digits:1',
             'price' => 'integer|min:0',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:png,jpg,jpeg',
+            'quantity' => 'required|integer|min:1'
         ];
+
+        if ($this->method() === 'PATCH') {
+            $rules['title'] = 'nullable|string|max:255';
+            $rules['genre'] = 'nullable|string|max:255';
+            $rules['price'] = 'nullable|integer|min:0';
+            $rules['quantity'] = 'integer|min:1';
+        }
+
+        return $rules;
     }
 }

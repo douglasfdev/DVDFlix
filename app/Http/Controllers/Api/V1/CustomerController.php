@@ -37,9 +37,9 @@ class CustomerController extends Controller
         return $this->customerService->update($request, $user);
     }
 
-    public function destroy(Request $request)
+    public function destroy(User $user)
     {
-        return $this->customerService->destroy($request->id);
+        return $this->customerService->destroy($user);
     }
 
     public function rentDvd(User $user, Dvd $dvd, Request $request)

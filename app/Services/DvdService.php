@@ -6,7 +6,6 @@ use App\Enums\Disponibility as DisponibilityEnum;
 use App\Http\Requests\DvdRequest;
 use App\Http\Resources\DvdResponse;
 use App\Models\Dvd;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class DvdService
@@ -61,6 +60,16 @@ class DvdService
   public function update(DvdRequest $request, Dvd $dvd)
   {
     $dvd->update($request->validated());
+
+    if (!$request->has('disponibility')) {
+      $dvd->disponibility = DisponibilityEnum::AVAILABLE->value();
+      $dvd->save();
+    }
+
+    if ($request->has('quantity')) {
+      $stock = $dvd->stock->first();
+      $stock->update(['quantity' => $request->quantity]);
+    }
 
     return DvdResponse::make($dvd->fresh(), Response::HTTP_OK);
   }

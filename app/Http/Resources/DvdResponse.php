@@ -25,24 +25,24 @@ class DvdResponse extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'title' => $this->title,
-            'genre' => $this->genre,
-            'disponibility' => Disponibility::from($this->disponibility)->label(),
-            'price' => $this->price,
-            'description' => $this->description,
-            'image' => $this->image,
+            'title' => $this->title ?? '',
+            'genre' => $this->genre ?? '',
+            'disponibility' => Disponibility::from($this->disponibility ?? Disponibility::AVAILABLE->value())->label(),
+            'price' => $this->price ?? '',
+            'description' => $this->description ?? '',
+            'image' => $this->image ?? '',
             'links' => [
                 [
                     'rel' => 'self',
-                    'href' => route('dvds.show', $this->id)
+                    'href' => route('dvds.show', $this->id ?? '')
                 ],
                 [
                     'rel' => 'put',
-                    'href' => route('dvds.update', $this->id)
+                    'href' => route('dvds.update', $this->id ?? '')
                 ],
                 [
                     'rel' => 'delete',
-                    'href' => route('dvds.destroy', $this->id)
+                    'href' => route('dvds.destroy', $this->id ?? '')
                 ]
             ]
         ];

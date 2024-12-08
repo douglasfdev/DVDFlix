@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Stock extends Model
 {
@@ -19,7 +20,7 @@ class Stock extends Model
 
     public function dvd(): BelongsTo
     {
-        return $this->belongsTo(Dvd::class);
+        return $this->belongsTo(Dvd::class, 'dvd_id', 'id');
     }
 
     public function pointOfSale(): BelongsTo

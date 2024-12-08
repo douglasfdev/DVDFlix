@@ -23,21 +23,21 @@ class CustomerResponse extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
+            'name' => $this->name ?? '',
+            'email' => $this->email ?? '',
+            'phone' => $this->phone ?? '',
             'links' => [
                 [
                     'rel' => 'self',
-                    'href' => route('customers.show', $this->id)
+                    'href' => route('customers.show', $this->id ?? '')
                 ],
                 [
                     'rel' => 'put',
-                    'href' => route('customers.update', $this->id)
+                    'href' => route('customers.update', $this->id ?? '')
                 ],
                 [
                     'rel' => 'delete',
-                    'href' => route('customers.destroy', $this->id)
+                    'href' => route('customers.destroy', $this->id ?? '')
                 ],
             ]
         ];
