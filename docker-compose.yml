@@ -12,7 +12,6 @@ services:
       - mysql
       - grafana
       - redis
-      - rabbitmq
     env_file:
       - .env
     networks:
@@ -73,21 +72,6 @@ services:
     command: redis-server --requirepass rental-dvd
     ports:
       - "6379:6379"
-    networks:
-      - rental-dvd-network
-
-  rabbitmq:
-    container_name: rental-dvd-rabbitmq
-    image: rabbitmq:3.12.14-management-alpine
-    ports:
-      - 5672:5672
-      - 15672:15672
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
-    volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - rental-dvd-network
 

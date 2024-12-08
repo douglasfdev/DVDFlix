@@ -2,6 +2,17 @@
 
 Este projeto é destinado a aplicação para alugueis de DVD.
 
+* [Configurando Ambiente com Docker](#configurando-ambiente-de-desenvolvimento)
+* * [Filas](#filas)
+* * [Cron Tasks](#scheduler--cron)
+-----
+* [Configurando Localmente](#para-ambiente-local-basta-ter-o-php-na-versão-82-ou-acima-também-precisa-ter-redis-e-mysql-instalado-na-máquina)
+* * [Filas](#filas-1)
+* * [Cron Tasks](#scheduler--cron-1)
+-----
+* [Postman](#postman)
+* [Diagrama do Banco de Dados](#diagrama-do-banco-de-dados)
+
 ## Configurando ambiente de desenvolvimento
 
 ## Copie e edite(opcional) o arquivo .env
@@ -54,6 +65,9 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 ## Rodar o composer
 *`composer install`*
 
+## Gerar uma secret key
+*`php artisan key:generate`*
+
 ## Rodar as migrations com as seeds
 Se atentar ao .env DB_HOST precisa estar localhost (127.0.0.1) ao invés de rental-dvd-db
 *`php artisan migrate:fresh --seed`*
@@ -76,4 +90,11 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 ---------
 
 # Postman
-[Collection](./Rent_a_DVD.postman_collection.json)
+[Collection](assets/Rent_a_DVD.postman_collection.json)
+
+# Diagrama do Banco de Dados
+[Documentação](https://dbdocs.io/douglas.fernandes91/Rent_a_Dvd)
+
+[DiagramaOnline](https://dbdiagram.io/d/6754fbd0e9daa85aca009b5d)
+
+![Diagrama](assets/DatabaseDiagram.png)
