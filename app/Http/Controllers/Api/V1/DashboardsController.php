@@ -9,7 +9,7 @@ class DashboardsController
 {
   public function __construct(protected SalesComission $salesComission) {}
 
-  public function index()
+  public function sellersComissions()
   {
     return SalesComissionResponse::collection($this->salesComission->all());
   }

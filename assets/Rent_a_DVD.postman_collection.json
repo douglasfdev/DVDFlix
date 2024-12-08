@@ -46,7 +46,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/customers/701",
+							"raw": "{{BASE_URL}}/api/v1/customers/922",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -54,7 +54,7 @@
 								"api",
 								"v1",
 								"customers",
-								"701"
+								"922"
 							]
 						}
 					},
@@ -73,7 +73,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ab\",\r\n    \"email\": \"asb@ba.com\",\r\n    \"phone\": \"11896299090\",\r\n    \"password\": \"12345azbas\"\r\n}",
+							"raw": "{\r\n    \"name\": \"123\",\r\n    \"email\": \"a1@1a.com\",\r\n    \"phone\": \"11896229090\",\r\n    \"password\": \"12345azbas\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -141,7 +141,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/customers/702",
+							"raw": "{{BASE_URL}}/api/v1/customers/3",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -149,7 +149,7 @@
 								"api",
 								"v1",
 								"customers",
-								"702"
+								"3"
 							]
 						}
 					},
@@ -268,9 +268,44 @@
 					"response": []
 				},
 				{
-					"name": "Update DVD",
+					"name": "Disponibility Update DVD",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/dvds/511",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dvds",
+								"511"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove DVD",
+					"request": {
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Accept",
@@ -309,7 +344,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/dvds/511",
+							"raw": "{{BASE_URL}}/api/v1/dvds/5",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -317,7 +352,7 @@
 								"api",
 								"v1",
 								"dvds",
-								"511"
+								"5"
 							]
 						}
 					},
@@ -374,7 +409,19 @@
 					"name": "Comissões de Vendas",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/dashboards/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dashboards",
+								""
+							]
+						}
 					},
 					"response": []
 				}

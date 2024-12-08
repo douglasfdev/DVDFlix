@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\BelongsToCompany;
 use Illuminate\Database\Eloquent\Model;
 
 class SalesComission extends Model

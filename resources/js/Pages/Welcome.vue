@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import Footer from './Footer.vue';
 import { ref, computed, onMounted, onUpdated } from 'vue';
 import { AxiosError } from 'axios';
 import api from '../infra/Gateways/DvdsGateway';
@@ -62,14 +63,23 @@ onMounted(() => {
 <template>
 
     <Head title="Welcome" />
+    <nav class="p-4 bg-gray-800">
+        <ul class="flex space-x-6">
+            <li>
+                <Link :href="route('dashboard')" class="font-medium text-white hover:text-teal-300">
+                Dashboard de Comissões
+                </Link>
+            </li>
+        </ul>
+    </nav>
 
     <div v-if="isLoading" class="skeleton-loader">
-        <span class="skeleton-item" v-for="i in 5" :key="i"></span>
+        <span class="skeleton-item" v-for="i in 25" :key="i"></span>
     </div>
 
     <div v-else class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <div class="text-center">
-            <h1 class="text-4xl font-bold text-blue-600">Bem-vindo ao DVDflix!</h1>
+            <h1 class="text-4xl font-bold text-blue-600">Bem-vindo ao DVDFlix!</h1>
             <p class="mt-2 text-lg text-gray-700">
                 Encontre os melhores filmes para assistir no conforto da sua casa.
             </p>
@@ -99,6 +109,8 @@ onMounted(() => {
             </button>
         </div>
     </div>
+
+    <Footer />
 </template>
 
 <style scoped>

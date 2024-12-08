@@ -30,6 +30,6 @@ Route::middleware(['throttle:api'])->group(function () {
     });
 
     Route::prefix('dashboards')->group(function () {
-        Route::get('/', [DashboardsController::class, 'index'])->name('dashboards.index');
+        Route::get('/sellersComissions', [DashboardsController::class, 'sellersComissions'])->name('dashboards.index');
     });
 });
