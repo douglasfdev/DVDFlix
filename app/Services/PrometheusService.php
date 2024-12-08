@@ -29,11 +29,10 @@ class PrometheusService
     /**
      * @throws MetricsRegistrationException
      */
-    public function createTestOrder ( $count = 1 ): void
+    public function createTestOrder($count = 1): void
     {
-        $counter = $this->collectorRegistry->getOrRegisterCounter( 'orders', 'count', 'Number of Orders', [ 'category' ] );
+        $counter = $this->collectorRegistry->getOrRegisterCounter('orders', 'count', 'Number of Orders', ['category']);
 
-        $counter->incBy( $count, [ $this->orderCategory ] );
-
+        $counter->incBy($count, ['category' => 'test']);
     }
 }
