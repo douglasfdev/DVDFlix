@@ -1,5 +1,6 @@
 services:
   app:
+    user: root
     container_name: rental-dvd-app
     restart: unless-stopped
     build:
@@ -9,6 +10,7 @@ services:
       - "5173:5173"
     volumes:
       - ./:/var/www
+    command: bash -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache && php-fpm"
     tty: true
     depends_on:
       - mysql
@@ -20,6 +22,7 @@ services:
       - rental-dvd-network
 
   nginx:
+    user: root
     image: nginx:alpine
     restart: unless-stopped
     ports:
@@ -52,6 +55,7 @@ services:
       - rental-dvd-network
 
   grafana:
+    user: root
     container_name: rental-dvd-grafana
     image: grafana/grafana:latest
     restart: always
@@ -83,6 +87,7 @@ services:
       - rental-dvd-network
 
   frontend:
+    user: root
     container_name: rental-dvd-frontend
     image: node:lts-alpine
     restart: unless-stopped
@@ -91,7 +96,10 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-    command: "npm run build && npm run dev"
+    command:
+    - sh
+    - -c
+    - "npm i && npm run build && npm run dev"
     depends_on:
       - app
     tty: true

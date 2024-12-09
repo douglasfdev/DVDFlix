@@ -39,7 +39,7 @@ sudo su - ${USER}
 *`docker-compose up -d`*
 
 ## Rodar o composer
-*`docker-compose exec app composer install`*
+*`docker-compose exec app sudo composer install`*
 
 ## Gerar uma secret key
 *`docker-compose exec app php artisan key:generate`*

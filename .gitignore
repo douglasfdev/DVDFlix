@@ -22,4 +22,6 @@ yarn-error.log
 /.vscode
 /.zed
 .docker/mysql/dbdata
-.docker/grafana/provisioning
+!.docker/grafana/grafana.ini
+.docker/grafana
+storage/*

@@ -19,7 +19,7 @@ export default defineConfig({
     ],
     server: {
         hmr: {
-            host: 'localhost',
+            host: 'host.docker.internal',
         },
         host: true,
         port: 5173
