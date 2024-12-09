@@ -42,7 +42,7 @@ sudo su - ${USER}
 *`docker-compose exec app sudo composer install`*
 
 ## Gerar uma secret key
-*`docker-compose exec app php artisan key:generate`*
+*`docker-compose exec app php sudo artisan key:generate`*
 
 ## Rodar as migrations com as seeds
 *`docker-compose exec app php artisan migrate:fresh --seed`*

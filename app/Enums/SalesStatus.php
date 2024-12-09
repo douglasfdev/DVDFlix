@@ -11,8 +11,8 @@ enum SalesStatus: string
     public function label(): string
     {
         return match ($this) {
-            SalesStatus::PENDING => 'Pendiente',
-            SalesStatus::APPROVED => 'Aprobada',
+            SalesStatus::PENDING => 'Pendente',
+            SalesStatus::APPROVED => 'Aprovada',
             SalesStatus::CANCELED => 'Cancelada',
         };
     }
