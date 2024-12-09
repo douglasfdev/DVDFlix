@@ -99,7 +99,7 @@ onMounted(() => {
             <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <li v-for="dvd in dvds" :key="dvd.title">
                     <div class="p-4 text-center bg-white rounded-lg shadow">
-                        <h3 class="text-lg font-semibold">{{ dvd.title }}</h3>
+                        <h3 class="movie-title text-lg font-semibold" :title="dvd.title">{{ dvd.title }}</h3>
                         <img :src="dvd.image" alt="Poster" class="object-cover w-full h-48">
                         <p class="text-sm text-gray-600">{{ dvd.genre }}</p>
                     </div>
@@ -150,5 +150,9 @@ onMounted(() => {
     100% {
         background-color: #e0e0e0;
     }
+}
+
+.movie-title {
+    text-transform: capitalize;
 }
 </style>

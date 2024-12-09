@@ -93,7 +93,6 @@ services:
     restart: unless-stopped
     ports:
       - "5172:5172"
-      - "5173:5173"
     working_dir: /var/www
     volumes:
       - ./:/var/www

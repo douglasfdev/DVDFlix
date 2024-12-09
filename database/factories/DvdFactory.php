@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\Disponibility;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Http;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dvd>
@@ -19,13 +20,16 @@ class DvdFactory extends Factory
      */
     public function definition(): array
     {
+        // make a random of movies genre
+        $genre = fake()->randomElement(['Ação', 'Aventura', 'Comédia', 'Drama', 'Ficção Científica', 'Romance', 'Terror']);
+
         return [
-            'title' => fake()->name(),
-            'genre' => fake()->name(),
+            'title' => fake()->word() . ' ' . fake()->word(),
+            'genre' => $genre,
             'disponibility' => fake()->numberBetween(1, 2),
             'price' => fake()->randomFloat(2, 0, 100),
             'description' => fake()->text(),
-            'image' => fake()->imageUrl(),
+            'image' => 'https://picsum.photos/200',
         ];
     }
 }
