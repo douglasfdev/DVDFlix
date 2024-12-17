@@ -98,7 +98,7 @@ ou rodar o worker para lançar o cron task a cada minuto caso tenha um scheduler
 [Collection](assets/DVDFlix.postman_collection.json)
 
 # Diagrama do Banco de Dados
-[Documentação](https://dbdocs.io/douglas.fernandes91/DVDFlix)
+[Documentação](https://dbdocs.io/douglas.fernandes91/Rent_a_Dvd)
 
 [DiagramaOnline](https://dbdiagram.io/d/6754fbd0e9daa85aca009b5d)
 
