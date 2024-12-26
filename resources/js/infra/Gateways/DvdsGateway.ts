@@ -1,5 +1,6 @@
 import { AxiosHttpClient } from "../Http";
 import { IHttpClient } from "../Http/IHttpClient";
+import { AxiosError } from "axios";
 
 class DvdsGateway {
   constructor(private readonly httpClient: IHttpClient) { }
@@ -9,7 +10,10 @@ class DvdsGateway {
       return this.httpClient.get<T>(`/api/v1/dvds`, params);
     }
     catch (error) {
-      throw error;
+      if (error instanceof Error || error instanceof AxiosError) {
+        throw new Error(error.message);
+      }
+      throw new Error('Unexpected error occurred');
     }
   }
 }

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
-import Footer from './Footer.vue';
-import { ref, computed, onMounted, onUpdated } from 'vue';
+import { Head } from '@inertiajs/vue3';
+import { ref, computed, onMounted } from 'vue';
 import { AxiosError } from 'axios';
 import api from '../infra/Gateways/DvdsGateway';
 import { Dvd, DvdApiResponse, Links, Meta } from '@/domain';
@@ -71,23 +70,12 @@ onMounted(() => {
 </script>
 
 <template>
-
-    <Head title="Welcome" />
-    <nav class="p-4 bg-gray-800">
-        <ul class="flex space-x-6">
-            <li>
-                <Link :href="route('dashboard')" class="font-medium text-white hover:text-teal-300">
-                Dashboard de Comissões
-                </Link>
-            </li>
-        </ul>
-    </nav>
-
+    <Head title="Dvds" />
     <div v-if="isLoading" class="skeleton-loader">
         <span class="skeleton-item" v-for="i in 25" :key="i"></span>
     </div>
 
-    <div v-else class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div v-else class="grid grid-flow-row auto-rows-max justify-center">
         <div class="text-center">
             <h1 class="text-4xl font-bold text-blue-600">Bem-vindo ao DVDFlix!</h1>
             <p class="mt-2 text-lg text-gray-700">
@@ -98,9 +86,9 @@ onMounted(() => {
         <div class="w-full max-w-5xl mt-10">
             <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <li v-for="dvd in dvds" :key="dvd.title">
-                    <div class="p-4 text-center bg-white rounded-lg shadow">
-                        <h3 class="movie-title text-lg font-semibold" :title="dvd.title">{{ dvd.title }}</h3>
-                        <img :src="dvd.image" alt="Poster" class="object-cover w-full h-48">
+                    <div class="p-4 text-center bg-white rounded-lg shadow hover:scale-110 transition duration-300">
+                        <h3 class="movie-title font-semibold" :title="dvd.title">{{ dvd.title }}</h3>
+                        <img :src="dvd.image" alt="Poster">
                         <p class="text-sm text-gray-600">{{ dvd.genre }}</p>
                     </div>
                 </li>
@@ -119,8 +107,6 @@ onMounted(() => {
             </button>
         </div>
     </div>
-
-    <Footer />
 </template>
 
 <style scoped>

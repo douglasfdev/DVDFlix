@@ -24,7 +24,7 @@ class DvdFactory extends Factory
         $genre = fake()->randomElement(['Ação', 'Aventura', 'Comédia', 'Drama', 'Ficção Científica', 'Romance', 'Terror']);
 
         return [
-            'title' => fake()->word() . ' ' . fake()->word(),
+            'title' => fake('pt_BR')->word() . ' ' . fake('pt_BR')->word(),
             'genre' => $genre,
             'disponibility' => fake()->numberBetween(1, 2),
             'price' => fake()->randomFloat(2, 0, 100),

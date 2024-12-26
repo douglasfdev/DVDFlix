@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { Bar } from 'vue-chartjs';
@@ -51,6 +52,7 @@ onMounted(() => {
 </script>
 
 <template>
+    <Head title="Dashboard" />
     <div>
         <h1 class="mb-4 text-2xl font-bold">Gráfico de Comissões</h1>
         <div v-if="chartData">
