@@ -2,7 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { ref, computed, onMounted } from 'vue';
 import { AxiosError } from 'axios';
-import api from '../infra/Gateways/DvdsGateway';
+import api from '../infra/Gateways';
 import { Dvd, DvdApiResponse, Links, Meta } from '@/domain';
 
 const dvds = ref<Dvd[] | null>([]);
@@ -23,7 +23,7 @@ const getDvds = async (page: number = 1) => {
             data: {
                 data, meta: metaData, links: linksData
             }
-        } = await api.getDvds<DvdApiResponse>({ params: { page } });
+        } = await api.dvdGateway.getDvds<DvdApiResponse>({ params: { page } });;
         dvds.value = data;
         meta.value = metaData;
         links.value = linksData;
@@ -110,33 +110,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.skeleton-loader {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.skeleton-item {
-    background-color: #e0e0e0;
-    height: 20px;
-    border-radius: 5px;
-    animation: shimmer 1.5s infinite;
-    width: 100%;
-}
-
-@keyframes shimmer {
-    0% {
-        background-color: #e0e0e0;
-    }
-
-    50% {
-        background-color: #f0f0f0;
-    }
-
-    100% {
-        background-color: #e0e0e0;
-    }
-}
 
 .movie-title {
     text-transform: capitalize;

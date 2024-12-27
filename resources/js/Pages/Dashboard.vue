@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { Bar } from 'vue-chartjs';
-import api from '../infra/Gateways/DashboardsGateway';
+import api from '../infra/Gateways';
 import { CommissionApiResponse } from '@/domain';
 
 interface Dataset {
@@ -22,10 +22,11 @@ interface ChartData {
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const chartData = ref<ChartData | null>(null);
+const isLoading = ref(true);
 
 const fetchData = async () => {
     try {
-        const { data: { data } } = await api.getComissions<CommissionApiResponse>();
+        const { data: { data } } = await api.dashboardGateway.getComissions<CommissionApiResponse>();
         const labels = data.map(item => item.seller);
         const commissions = data.map(item => parseFloat(item.comission));
 
@@ -43,6 +44,8 @@ const fetchData = async () => {
         };
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
+    } finally {
+        isLoading.value = false;
     }
 };
 
@@ -58,8 +61,8 @@ onMounted(() => {
         <div v-if="chartData">
             <Bar :data="chartData" />
         </div>
-        <div v-else>
-            <p>Carregando dados...</p>
+        <div v-else class="skeleton-loader">
+            <span class="skeleton-item" v-for="i in 25" :key="i"></span>
         </div>
     </div>
 </template>
