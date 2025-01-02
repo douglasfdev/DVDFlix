@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { AxiosHttpClient } from "../Http";
 import { IHttpClient } from "../Http/IHttpClient";
 
@@ -9,7 +10,10 @@ class DashboardsGateway {
       return this.httpClient.get<T>(`/api/v1/dashboards/sellersComissions`, params);
     }
     catch (error) {
-      throw error;
+      if (error instanceof Error || error instanceof AxiosError) {
+        throw new Error(error.message);
+      }
+      throw new Error('Unexpected error occurred');
     }
   }
 }

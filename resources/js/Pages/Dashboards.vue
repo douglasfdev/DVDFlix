@@ -23,6 +23,12 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const chartData = ref<ChartData | null>(null);
 const isLoading = ref(true);
+const props = defineProps({
+    directionSkeleton: {
+        type: String,
+        required: true
+    }
+})
 
 const fetchData = async () => {
     try {
@@ -61,10 +67,8 @@ onMounted(() => {
         <div v-if="chartData">
             <Bar :data="chartData" />
         </div>
-        <div v-else class="skeleton-loader">
+        <div v-else class="skeleton-loader" :class="props.directionSkeleton">
             <span class="skeleton-item" v-for="i in 25" :key="i"></span>
         </div>
     </div>
 </template>
-
-<style scoped></style>

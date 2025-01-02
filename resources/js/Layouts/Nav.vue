@@ -9,7 +9,12 @@ import { Head, Link } from '@inertiajs/vue3';
         <ul class="flex space-x-6">
             <li>
                 <Link :href="route('home')" class="font-medium text-white hover:text-teal-300">
-                    Home
+                Home
+                </Link>
+            </li>
+            <li>
+                <Link :href="route('customers')" class="font-medium text-white hover:text-teal-300">
+                Usuários
                 </Link>
             </li>
             <li>
