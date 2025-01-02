@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\CustomerResponse;
 use App\Models\Customer;
 use App\Models\User;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class CustomerService
@@ -16,12 +17,12 @@ class CustomerService
     private readonly Customer $customer
   ) {}
 
-  public function index()
+  public function index(): AnonymousResourceCollection
   {
     return CustomerResponse::collection($this->user->with('customer')->paginate(25));
   }
 
-  public function store(UserRequest $request)
+  public function store(UserRequest $request): CustomerResponse
   {
     $customerCreation = $this->user->create($request->validated());
     $customerCreation->role_id = RoleEnum::CUSTOMER->value();
@@ -31,7 +32,7 @@ class CustomerService
     return CustomerResponse::make($customerCreation, Response::HTTP_CREATED);
   }
 
-  public function show(User $user)
+  public function show(User $user): CustomerResponse
   {
     if (!$user) {
       return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
@@ -45,7 +46,7 @@ class CustomerService
     return CustomerResponse::make($customer, Response::HTTP_OK);
   }
 
-  public function update(UserRequest $request, User $user)
+  public function update(UserRequest $request, User $user): CustomerResponse
   {
     if (!$user->with('customer')->find($user->id)) {
       return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);
@@ -56,7 +57,7 @@ class CustomerService
     return CustomerResponse::make($user->refresh(), Response::HTTP_OK);
   }
 
-  public function destroy(User $user)
+  public function destroy(User $user): CustomerResponse
   {
     if (!$user) {
       return CustomerResponse::make(null, Response::HTTP_NOT_FOUND);

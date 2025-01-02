@@ -4,21 +4,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return redirect('/home');
-});
+Route::get('/', fn () => redirect('/home'));
 
-Route::get('/home', function () {
-    return Inertia::render('Dvds');
-})->name('home');
+Route::get('/home', fn () => Inertia::render('Dvds'))->name('home');
 
-Route::get('/dvds', function () {
-    return Inertia::render('Dvds');
-})->name('dvds');
+Route::get('/dvds', fn () => Inertia::render('Dvds'))->name('dvds');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::get('/dashboard', fn () => Inertia::render('Dashboards'))->name('dashboard');
+
+Route::get('/customers', fn () => Inertia::render('Users'))->name('customers');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

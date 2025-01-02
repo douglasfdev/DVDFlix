@@ -9,9 +9,7 @@ use Illuminate\Http\Response;
 
 class DvdResponse extends JsonResource
 {
-    public ?int $statusCode;
-
-    public function __construct($resource, ?int $statusCode = Response::HTTP_OK)
+    public function __construct($resource, public ?int $statusCode = Response::HTTP_OK)
     {
         parent::__construct($resource);
         $this->statusCode = $statusCode;
@@ -31,6 +29,7 @@ class DvdResponse extends JsonResource
             'price' => $this->price ?? '',
             'description' => $this->description ?? '',
             'image' => $this->image ?? '',
+            'quantity' => $this->stock->quantity ?? null,
             'links' => [
                 [
                     'rel' => 'self',

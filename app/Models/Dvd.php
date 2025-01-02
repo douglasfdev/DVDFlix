@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\{
     BelongsTo,
-    HasMany
+    HasMany,
+    HasOne
 };
 
 class Dvd extends Model
@@ -29,9 +30,9 @@ class Dvd extends Model
         return $this->hasMany(Customer::class);
     }
 
-    public function stock(): HasMany
+    public function stock(): HasOne
     {
-        return $this->hasMany(Stock::class, 'dvd_id', 'id');
+        return $this->hasOne(Stock::class, 'dvd_id', 'id');
     }
 
     public function cart(): BelongsTo

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\SalesStatus;
+use App\Http\Resources\RentDvdResponse;
 use App\Jobs\DisponibilityManagementJob;
 use App\Models\{
   Cart,
@@ -24,21 +25,23 @@ class RentDvdService
 
   public function customerRentedDvd(User $user, Dvd $dvd, Request $request)
   {
-    $dvdStock = $this->stock::where('dvd_id', $dvd->id)->first();
+    $dvdStock = $dvd->stock ?? null;
 
-    $notHasStock = $dvdStock->quantity === 0;
+    if ($dvdStock?->quantity === null) {
+      return response()->json(['message' => 'Dvd not available'], Response::HTTP_BAD_REQUEST);
+    }
 
-    if ($notHasStock) {
+    if ($dvdStock?->quantity === null || $dvdStock?->quantity === 0) {
       return response()->json(['message' => 'Dvd not available'], Response::HTTP_BAD_REQUEST);
     }
 
     $dvdStock->decrement('quantity', 1);
 
-    if ($notHasStock) {
+    if ($dvdStock?->quantity <= 0) {
       DisponibilityManagementJob::dispatch($dvd)->onConnection('redis');
     }
 
-    $cart = $this->cart::create([
+    $carts = $this->cart::create([
       'customer_id' => $user->id,
       'dvd_id' => $dvd->id
     ]);
@@ -46,19 +49,17 @@ class RentDvdService
     $sales = $this->sales::create([
       'point_of_sale_id' => $request->point_of_sale_id,
       'seller_id' => $request->seller_id,
-      'cart_id' => $cart->id,
+      'cart_id' => $carts->id,
       'sold_at' => $request->sold_at ?? now(),
       'status' => $request->status ?? SalesStatus::PENDING->value(),
       'total_amount' => $request->total_amount ?? 0
     ]);
 
-    return response()->json([
-      'data' => [
-        ['sale' => $sales],
-        ['cart' => $cart],
-        ['dvd' => $dvd],
-        ['user' => $user]
-      ]
+    return RentDvdResponse::make([
+      'sale' => $sales,
+      'cart' => $carts,
+      'dvd' => $dvd,
+      'user' => $user
     ], Response::HTTP_CREATED);
   }
 }
