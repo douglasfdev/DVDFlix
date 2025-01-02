@@ -7,9 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SalesComissionResponse extends JsonResource
 {
-    private int $statusCode;
-
-    public function __construct($resource, ?int $statusCode = 200)
+    public function __construct($resource, public ?int $statusCode = 200)
     {
         parent::__construct($resource);
         $this->statusCode = $statusCode;
