@@ -10,10 +10,16 @@ export interface User {
     }>;
 }
 
-export interface UserApiResponse {
+export interface UserApiAxiosResponse {
     data: {
         data: User[];
         links: Links;
         meta: Meta;
     };
+}
+
+export interface UserApiFetchResponse {
+    data: User[];
+    links: Links;
+    meta: Meta;
 }

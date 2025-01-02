@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import api from '../infra/Gateways';
-import { User, UserApiResponse } from '@/domain';
+import { User, UserApiFetchResponse } from '@/domain';
 import { onMounted, ref } from 'vue';
 import { Links, Meta } from '@/infra/domain';
 
@@ -17,10 +17,8 @@ const links = ref<Links>({
 const getCustomers = async (page: number = 1) => {
     try {
         const {
-            data: {
-                data, meta: metaData, links: linksData
-            }
-        } = await api.usersGatway.getCustomers<UserApiResponse>({ params: { page } });
+            data, meta: metaData, links: linksData
+        } = await api.usersGatway.getCustomers<UserApiFetchResponse>({ params: { page } });
 
         customers.value = data;
         meta.value = metaData;

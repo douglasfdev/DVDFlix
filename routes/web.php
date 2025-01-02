@@ -10,7 +10,12 @@ Route::get('/home', fn () => Inertia::render('Dvds'))->name('home');
 
 Route::get('/dvds', fn () => Inertia::render('Dvds'))->name('dvds');
 
-Route::get('/dashboard', fn () => Inertia::render('Dashboards'))->name('dashboard');
+Route::get('/dashboard', fn () => Inertia::render('Dashboards', [
+    'display' => 'flex',
+    'flexDirection' => 'row',
+    'gap' =>  '10px',
+    'height' => '500px'
+]))->name('dashboard');
 
 Route::get('/customers', fn () => Inertia::render('Users'))->name('customers');
 

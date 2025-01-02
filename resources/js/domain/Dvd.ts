@@ -13,10 +13,16 @@ export interface Dvd {
   }>;
 }
 
-export interface DvdApiResponse {
+export interface DvdApiAxiosResponse {
     data: {
       data: Dvd[];
       links: Links;
       meta: Meta;
     };
+}
+
+export interface DvdApiFetchResponse {
+    data: Dvd[];
+    links: Links;
+    meta: Meta;
 }

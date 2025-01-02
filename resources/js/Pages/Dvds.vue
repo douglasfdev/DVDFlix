@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/vue3';
 import { ref, computed, onMounted } from 'vue';
 import { AxiosError } from 'axios';
 import api from '../infra/Gateways';
-import { Dvd, DvdApiResponse } from '@/domain';
+import { Dvd, DvdApiFetchResponse } from '@/domain';
 import { Links, Meta } from '@/infra/domain';
 
 const dvds = ref<Dvd[] | null>([]);
@@ -21,10 +21,9 @@ const isFetching = ref(false);
 const getDvds = async (page: number = 1) => {
     try {
         const {
-            data: {
-                data, meta: metaData, links: linksData
-            }
-        } = await api.dvdGateway.getDvds<DvdApiResponse>({ params: { page } });
+            data, meta: metaData, links: linksData
+        } = await api.dvdGateway.getDvds<DvdApiFetchResponse>({ params: { page } });
+        console.log(data);
         dvds.value = data;
         meta.value = metaData;
         links.value = linksData;

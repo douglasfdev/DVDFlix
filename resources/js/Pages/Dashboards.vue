@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { Bar } from 'vue-chartjs';
 import api from '../infra/Gateways';
-import { CommissionApiResponse } from '@/domain';
+import { CommissionApiFetchResponse } from '@/domain';
 
 interface Dataset {
     label: string;
@@ -24,15 +24,27 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const chartData = ref<ChartData | null>(null);
 const isLoading = ref(true);
 const props = defineProps({
-    directionSkeleton: {
+    display: {
+        type: String,
+        required: true
+    },
+    flexDirection: {
+        type: String,
+        required: true
+    },
+    gap: {
+        type: String,
+        required: true
+    },
+    height: {
         type: String,
         required: true
     }
-})
+});
 
 const fetchData = async () => {
     try {
-        const { data: { data } } = await api.dashboardGateway.getComissions<CommissionApiResponse>();
+        const { data } = await api.dashboardGateway.getComissions<CommissionApiFetchResponse>();
         const labels = data.map(item => item.seller);
         const commissions = data.map(item => parseFloat(item.comission));
 
@@ -51,7 +63,7 @@ const fetchData = async () => {
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
     } finally {
-        isLoading.value = false;
+        //isLoading.value = false;
     }
 };
 
@@ -62,13 +74,13 @@ onMounted(() => {
 
 <template>
     <Head title="Dashboard" />
-    <div>
+    <div class="flex space-between">
         <h1 class="mb-4 text-2xl font-bold">Gráfico de Comissões</h1>
-        <div v-if="chartData">
+        <div v-if="chartData && !isLoading">
             <Bar :data="chartData" />
         </div>
-        <div v-else class="skeleton-loader" :class="props.directionSkeleton">
-            <span class="skeleton-item" v-for="i in 25" :key="i"></span>
+        <div v-else :class="props.display, props.flexDirection, props.gap, props.height">
+            <span class="skeleton-ite" v-for="i in 25" :key="i"></span>
         </div>
     </div>
 </template>

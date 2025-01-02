@@ -18,6 +18,7 @@ export class AxiosHttpClient implements IHttpClient {
     url: string,
     options?: AxiosRequestConfig,
   ) {
+    console.log('url', url);
     return this.instance.get<T, R, D>(url, options);
   }
 

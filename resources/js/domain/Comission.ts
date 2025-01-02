@@ -11,6 +11,13 @@ export interface Commission {
   comission: string;
 }
 
-export interface CommissionApiResponse {
-  data: { data: Commission[] };
+
+export interface CommissionApiAxiosResponse {
+  data: {
+    data: Commission[];
+  };
 }
+
+export interface CommissionApiFetchResponse {
+    data: Commission[];
+  }

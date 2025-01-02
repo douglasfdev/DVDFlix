@@ -1,4 +1,4 @@
-import { AxiosHttpClient } from "../Http";
+import { FetchHttpClient } from "../Http";
 import { IHttpClient } from "../Http/IHttpClient";
 import { AxiosError } from "axios";
 
@@ -6,7 +6,7 @@ class UsersGateway {
     constructor(private readonly httpClient: IHttpClient) { }
     async getCustomers<T = any>(params?: any): Promise<T> {
         try {
-            return this.httpClient.get<T>(`/api/v1/customers`, params);
+            return this.httpClient.get<T>(`/api/v1/customers`, {params});
         } catch (error) {
             if (error instanceof Error || error instanceof AxiosError) {
                 throw new Error(error.message);
@@ -16,4 +16,4 @@ class UsersGateway {
     }
 }
 
-export default new UsersGateway(new AxiosHttpClient());
+export default new UsersGateway(new FetchHttpClient());
