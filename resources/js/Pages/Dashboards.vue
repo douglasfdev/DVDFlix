@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { Bar } from 'vue-chartjs';
-import api from '../infra/Gateways';
+import api from '@/infra/Gateways';
 import { CommissionApiFetchResponse } from '@/domain';
 
 interface Dataset {
@@ -46,14 +46,14 @@ const fetchData = async () => {
     try {
         const { data } = await api.dashboardGateway.getComissions<CommissionApiFetchResponse>();
         const labels = data.map(item => item.seller);
-        const commissions = data.map(item => parseFloat(item.comission));
+        const comissions = data.map(item => parseFloat(item.comission));
 
         chartData.value = {
             labels: labels,
             datasets: [
                 {
                     label: 'Comissões',
-                    data: commissions,
+                    data: comissions,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1,
@@ -63,7 +63,7 @@ const fetchData = async () => {
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
     } finally {
-        //isLoading.value = false;
+        isLoading.value = false;
     }
 };
 
@@ -73,14 +73,15 @@ onMounted(() => {
 </script>
 
 <template>
+
     <Head title="Dashboard" />
-    <div class="flex space-between">
+    <div>
         <h1 class="mb-4 text-2xl font-bold">Gráfico de Comissões</h1>
-        <div v-if="chartData && !isLoading">
+        <div v-if="chartData">
             <Bar :data="chartData" />
         </div>
-        <div v-else :class="props.display, props.flexDirection, props.gap, props.height">
-            <span class="skeleton-ite" v-for="i in 25" :key="i"></span>
+        <div v-else class="skeleton-loader" :class="props.directionSkeleton">
+            <span class="skeleton-item" v-for="i in 25" :key="i"></span>
         </div>
     </div>
 </template>

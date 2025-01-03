@@ -2,7 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { ref, computed, onMounted } from 'vue';
 import { AxiosError } from 'axios';
-import api from '../infra/Gateways';
+import api from '@/infra/Gateways';
 import { Dvd, DvdApiFetchResponse } from '@/domain';
 import { Links, Meta } from '@/infra/domain';
 
@@ -70,12 +70,13 @@ onMounted(() => {
 </script>
 
 <template>
+
     <Head title="Dvds" />
     <div v-if="isLoading" class="skeleton-loader">
         <span class="skeleton-item" v-for="i in 25" :key="i"></span>
     </div>
 
-    <div v-else class="grid grid-flow-row auto-rows-max justify-center">
+    <div v-else class="grid justify-center grid-flow-row auto-rows-max">
         <div class="text-center">
             <h1 class="text-4xl font-bold text-blue-600">Bem-vindo ao DVDFlix!</h1>
             <p class="mt-2 text-lg text-gray-700">
@@ -86,8 +87,8 @@ onMounted(() => {
         <div class="w-full max-w-5xl mt-10">
             <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <li v-for="dvd in dvds" :key="dvd.title">
-                    <div class="p-4 text-center bg-white rounded-lg shadow hover:scale-110 transition duration-300">
-                        <h3 class="movie-title font-semibold" :title="dvd.title">{{ dvd.title }}</h3>
+                    <div class="p-4 text-center transition duration-300 bg-white rounded-lg shadow hover:scale-110">
+                        <h3 class="font-semibold movie-title" :title="dvd.title">{{ dvd.title }}</h3>
                         <img :src="dvd.image" alt="Poster">
                         <p class="text-sm text-gray-600">{{ dvd.genre }}</p>
                     </div>
@@ -110,7 +111,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .movie-title {
     text-transform: capitalize;
 }
