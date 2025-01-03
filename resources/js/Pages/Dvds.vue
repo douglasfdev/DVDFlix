@@ -23,7 +23,6 @@ const getDvds = async (page: number = 1) => {
         const {
             data, meta: metaData, links: linksData
         } = await api.dvdGateway.getDvds<DvdApiFetchResponse>({ params: { page } });
-        console.log(data);
         dvds.value = data;
         meta.value = metaData;
         links.value = linksData;
