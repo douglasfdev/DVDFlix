@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "eaa718c6-60c4-4ed2-945f-95d0a507a4f6",
+		"_postman_id": "0b221700-0111-4670-95e9-22194d2fcf95",
 		"name": "DVDFlix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26856028"
+		"_exporter_id": "20301019",
+		"_collection_link": "https://red-capsule-413493.postman.co/workspace/TESTES~2ba40a9e-e400-4c2c-b2a6-bc063db129b1/collection/20301019-0b221700-0111-4670-95e9-22194d2fcf95?action=share&source=collection_link&creator=20301019"
 	},
 	"item": [
 		{
@@ -420,6 +421,64 @@
 								"v1",
 								"dashboards",
 								"sellersComissions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prometheus",
+			"item": [
+				{
+					"name": "SellerComission",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/prometheus/sellersComissionsSum",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"prometheus",
+								"sellersComissionsSum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metrics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/prometheus/metrics/dvd-flix",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"prometheus",
+								"metrics",
+								"dvd-flix"
 							]
 						}
 					},
