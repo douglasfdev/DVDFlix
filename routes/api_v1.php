@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\{
     CustomerController,
     DvdController,
-    DashboardsController
+    DashboardsController,
+    PrometheusController
 };
+use Prometheus\CollectorRegistry;
+use Prometheus\RenderTextFormat;
 
 Route::prefix('customers')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
@@ -30,4 +33,9 @@ Route::prefix('customers/{user}/dvds/{dvd}')->group(function () {
 
 Route::prefix('dashboards')->group(function () {
     Route::get('/sellersComissions', [DashboardsController::class, 'sellersComissions'])->name('dashboards.index');
+});
+
+Route::prefix('prometheus')->group(function () {
+    Route::get('/sellersComissionsSum', [PrometheusController::class, 'createSellerComissionSum']);
+    Route::get('/metrics/{secret}', [PrometheusController::class, 'metrics'])->name('metrics');
 });

@@ -3,33 +3,28 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\PrometheusService;
-use  Illuminate\Http\JsonResponse;
-use  Prometheus\Exception\MetricsRegistrationException;
+use App\Services\PrometheusService;
+use App\Models\SalesComission;
+use Illuminate\Http\JsonResponse;
+use Prometheus\Exception\MetricsRegistrationException;
 
-class  PrometheusController extends Controller
+class PrometheusController extends Controller
 {
-    private PrometheusService $service;
 
-    public  function  __construct(PrometheusService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(private PrometheusService $service) {}
 
-    public  function  metrics(): string
+    public function metrics(string $secret): string
     {
-        return  $this->service->metrics();
+        return $this->service->metrics($secret);
     }
 
     /**
      * @throws MetricsRegistrationException
      */
-    public  function  createTestOrder(): JsonResponse
+    public function createSellerComissionSum(): JsonResponse
     {
-        $this->service->incrementOrder();
+        $this->service->createSellerComissionSum();
 
-        // Cria códigos de pedido
-
-        return  $this->successResponse('O pedido foi criado com sucesso.');
+        return  response()->json(['message' => 'Comission created']);
     }
 }

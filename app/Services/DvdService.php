@@ -21,7 +21,7 @@ class DvdService
         'disponibility',
         '!=',
         DisponibilityEnum::UNAVAILABLE->value()
-      )->paginate(25)
+      )->paginate(24)
     );
   }
 

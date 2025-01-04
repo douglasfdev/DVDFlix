@@ -19,7 +19,7 @@ class CustomerService
 
   public function index(): AnonymousResourceCollection
   {
-    return CustomerResponse::collection($this->user->with('customer')->paginate(25));
+    return CustomerResponse::collection($this->user->with('customer')->paginate(24));
   }
 
   public function store(UserRequest $request): CustomerResponse

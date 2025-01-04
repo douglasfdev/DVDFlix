@@ -36,6 +36,6 @@ class SalesComissionResponse extends JsonResource
 
     public function toResponse($request)
     {
-        return response()->json($this->toArray($request), $this->statusCode);
+        return response()->json($this->toArray($request), $this->statusCode)->header('Accept', 'application/json');
     }
 }
