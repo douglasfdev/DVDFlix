@@ -50,6 +50,8 @@ sudo su - ${USER}
 Não é necessário executar o comando *`php artisan serve`*, servidor já está com Nginx para expormos a API como serviço web
 Serviço estará rodando na URL local: *`http://localhost:8989/`*
 
+## Documentação API
+[Página de documentação da API](http://localhost:8989/docs/api#/)
 
 ### Filas
 As filas estão sendo implementadas com Redis.
