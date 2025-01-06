@@ -31,7 +31,7 @@ class DvdRequest extends FormRequest
             'quantity' => 'required|integer|min:1'
         ];
 
-        if ($this->method() === 'PATCH') {
+        if ($this->isMethod('PATCH')) {
             $rules['title'] = 'nullable|string|max:255';
             $rules['genre'] = 'nullable|string|max:255';
             $rules['price'] = 'nullable|integer|min:0';

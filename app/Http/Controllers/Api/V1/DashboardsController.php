@@ -11,6 +11,6 @@ class DashboardsController
 
   public function sellersComissions()
   {
-    return SalesComissionResponse::collection($this->salesComission->all());
+    return SalesComissionResponse::collection($this->salesComission->paginate(24));
   }
 }

@@ -30,7 +30,7 @@ class CustomerResponse extends JsonResource
                     'href' => route('customers.show', $this->id ?? '')
                 ],
                 [
-                    'rel' => 'put',
+                    'rel' => 'patch',
                     'href' => route('customers.update', $this->id ?? '')
                 ],
                 [

@@ -36,7 +36,7 @@ class DvdResponse extends JsonResource
                     'href' => route('dvds.show', $this->id ?? '')
                 ],
                 [
-                    'rel' => 'put',
+                    'rel' => 'patch',
                     'href' => route('dvds.update', $this->id ?? '')
                 ],
                 [

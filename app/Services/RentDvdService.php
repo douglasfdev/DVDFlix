@@ -27,17 +27,13 @@ class RentDvdService
   {
     $dvdStock = $dvd->stock ?? null;
 
-    if ($dvdStock?->quantity === null) {
-      return response()->json(['message' => 'Dvd not available'], Response::HTTP_BAD_REQUEST);
-    }
-
     if ($dvdStock?->quantity === null || $dvdStock?->quantity === 0) {
       return response()->json(['message' => 'Dvd not available'], Response::HTTP_BAD_REQUEST);
     }
 
     $dvdStock->decrement('quantity', 1);
 
-    if ($dvdStock?->quantity <= 0) {
+    if ($dvdStock?->quantity === 0) {
       DisponibilityManagementJob::dispatch($dvd)->onConnection('redis');
     }
 

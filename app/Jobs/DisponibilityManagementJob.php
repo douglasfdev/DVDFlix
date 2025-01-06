@@ -21,7 +21,6 @@ class DisponibilityManagementJob implements ShouldQueue
      */
     public function handle(): void
     {
-        dd($this->dvd);
         $this->dvd->update([
             'disponibility' => Disponibility::UNAVAILABLE->value()
         ]);

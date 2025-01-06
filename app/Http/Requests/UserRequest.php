@@ -23,11 +23,12 @@ class UserRequest extends FormRequest
   {
     $rules = [
       'name' => 'required|string|max:255',
-      'email' => 'required|string|email|max:255',
+      'email' => 'string|email|max:255',
       'phone' => 'nullable|string|regex:/^\+?[0-9]{10,15}$/'
     ];
 
-    if ($this->isMethod('post')) {
+    if ($this->isMethod('POST')) {
+      $rules['email'] = 'required|string|email|max:255';
       $rules['password'] = 'required|string|min:8';
     }
 
