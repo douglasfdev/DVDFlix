@@ -2,4 +2,5 @@
 
 use Illuminate\Support\Facades\Schedule;
 
-Schedule::command('app:dvd-price-strategy')->everyThreeMinutes();
+Schedule::command('dvd:price-strategy')->everyThreeMinutes();
+Schedule::command('prometheus:sum-all-sellers-comission')->everyTenMinutes();

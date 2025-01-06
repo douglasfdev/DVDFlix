@@ -7,8 +7,6 @@ use App\Http\Controllers\Api\V1\{
     DashboardsController,
     PrometheusController
 };
-use Prometheus\CollectorRegistry;
-use Prometheus\RenderTextFormat;
 
 Route::prefix('customers')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
@@ -36,6 +34,6 @@ Route::prefix('dashboards')->group(function () {
 });
 
 Route::prefix('prometheus')->group(function () {
-    Route::get('/sellersComissionsSum', [PrometheusController::class, 'createSellerComissionSum']);
+    Route::get('/sellersComissionsSum', [PrometheusController::class, 'createSellerComissionSum'])->name('sellersComissionsSum');
     Route::get('/metrics/{secret}', [PrometheusController::class, 'metrics'])->name('metrics');
 });

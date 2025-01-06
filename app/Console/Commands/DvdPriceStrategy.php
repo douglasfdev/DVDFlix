@@ -12,7 +12,7 @@ class DvdPriceStrategy extends Command
      *
      * @var string
      */
-    protected $signature = 'app:dvd-price-strategy';
+    protected $signature = 'dvd:price-strategy';
 
     /**
      * The console command description.
