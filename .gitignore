@@ -23,5 +23,8 @@ yarn-error.log
 /.zed
 .docker/mysql/dbdata
 !.docker/grafana/grafana.ini
-.docker/grafana
+!.docker/grafana/provisioning
+.docker/grafana/{csv,pdf,png}
+.docker/grafana/plugins
+.docker/grafana/grafana.db
 storage/*

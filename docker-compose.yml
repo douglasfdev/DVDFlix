@@ -10,7 +10,7 @@ services:
       - "5173:5173"
     volumes:
       - ./:/var/www
-    command: bash -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache && php-fpm"
+    command: bash -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache && php-fpm -D && php artisan serve --host=0.0.0.0 --port=5173"
     tty: true
     depends_on:
       - mysql
@@ -64,6 +64,7 @@ services:
     volumes:
       - .docker/grafana/provisioning:/etc/grafana/provisioning
       - ./:/var/www/html
+      - .docker/grafana/dashboards:/var/lib/grafana/dashboards
       - ./.docker/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./.docker/grafana:/var/lib/grafana
     environment:
@@ -73,6 +74,7 @@ services:
       - GF_SECURITY_ALLOW_EMBEDDING=${GF_SECURITY_ALLOW_EMBEDDING}
       - GF_AUTH_ANONYMOUS_ENABLED=${GF_AUTH_ANONYMOUS_ENABLED}
     depends_on:
+      - prometheus
       - mysql
     networks:
       - rental-dvd-network
@@ -97,12 +99,23 @@ services:
     volumes:
       - ./:/var/www
     command:
-    - sh
-    - -c
-    - "npm i && npm run build && npm run dev"
+      - sh
+      - -c
+      - "npm i && npm run build && npm run dev"
     depends_on:
       - app
     tty: true
+    networks:
+      - rental-dvd-network
+
+  prometheus:
+    container_name: rental-dvd-prometheus
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - rental-dvd-network
 

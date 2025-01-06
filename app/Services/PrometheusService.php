@@ -32,7 +32,7 @@ class PrometheusService
 
         header('Content-type: ' . RenderTextFormat::MIME_TYPE);
 
-        return $result;
+        return response()->json()->header('Content-Type', 'text/plain')->setContent($result);
     }
 
     /**
