@@ -38,8 +38,7 @@ sudo su - ${USER}
 ## Rodar o docker-compose
 *`docker-compose up -d`*
 
-## Rodar o composer
-*`docker-compose exec app sudo composer install`*
+## Aguardar o container da aplicação subir por completo para dar seguimento as dependências
 
 ## Gerar uma secret key
 *`docker-compose exec app sudo php artisan key:generate`*
