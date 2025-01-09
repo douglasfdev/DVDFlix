@@ -80,7 +80,7 @@ onMounted(() => {
         <div v-if="chartData">
             <Bar :data="chartData" />
         </div>
-        <div v-else class="skeleton-loader" :class="props.directionSkeleton">
+        <div v-else class="skeleton-loader">
             <span class="skeleton-item" v-for="i in 25" :key="i"></span>
         </div>
     </div>

@@ -28,11 +28,7 @@ class PrometheusService
 
         $renderer = new RenderTextFormat();
 
-        $result = $renderer->render($this->collectorRegistry->getMetricFamilySamples());
-
-        header('Content-type: ' . RenderTextFormat::MIME_TYPE);
-
-        return response()->json()->header('Content-Type', 'text/plain')->setContent($result);
+        return $renderer->render($this->collectorRegistry->getMetricFamilySamples());
     }
 
     /**
