@@ -28,7 +28,8 @@ class DvdRequest extends FormRequest
             'price' => 'integer|min:0',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:png,jpg,jpeg',
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
+            'point_of_sale_id' => 'required|integer|exists:point_of_sales,id'
         ];
 
         if ($this->isMethod('PATCH')) {

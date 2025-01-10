@@ -36,6 +36,11 @@ class DvdService
       $dvd->save();
     }
 
+    $dvd->stock()->create([
+      'quantity' => $request->quantity,
+      'point_of_sale_id' => $request->point_of_sale_id
+    ]);
+
     return DvdResponse::make($dvd, Response::HTTP_CREATED);
   }
 

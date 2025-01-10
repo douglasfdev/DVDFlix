@@ -47,7 +47,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/customers/922",
+							"raw": "{{BASE_URL}}/api/v1/customers/1",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -55,7 +55,7 @@
 								"api",
 								"v1",
 								"customers",
-								"922"
+								"1"
 							]
 						}
 					},
@@ -251,6 +251,16 @@
 									"key": "image",
 									"type": "file",
 									"src": "/C:/Users/User/Pictures/458602944_3455843741379854_8507895819447023482_n.jpg"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "point_of_sale_id",
+									"value": "1",
+									"type": "text"
 								}
 							]
 						},
@@ -432,7 +442,7 @@
 			"name": "Prometheus",
 			"item": [
 				{
-					"name": "SellerComission",
+					"name": "SellerComissionSum",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -464,7 +474,7 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/json",
+								"value": "text/plain",
 								"type": "text"
 							}
 						],

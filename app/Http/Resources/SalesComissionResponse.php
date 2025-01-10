@@ -10,7 +10,6 @@ class SalesComissionResponse extends JsonResource
     public function __construct($resource, public ?int $statusCode = 200)
     {
         parent::__construct($resource);
-        $this->statusCode = $statusCode;
     }
 
     /**
@@ -36,6 +35,6 @@ class SalesComissionResponse extends JsonResource
 
     public function toResponse($request)
     {
-        return response()->json($this->toArray($request), $this->statusCode)->header('Accept', 'application/json');
+        return parent::toResponse($request)->setStatusCode($this->statusCode)->header('Accept', 'application/json');
     }
 }
